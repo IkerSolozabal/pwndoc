@@ -287,6 +287,10 @@ function cvssStrToObject(cvss) {
     return res
 }
 
+function formatDateMilitary(date) {
+    return date.replace(/-/g, '');
+}
+
 async function prepAuditData(data, settings) {
     /** CVSS Colors for table cells */
     var noneColor = settings.report.public.cvssColors.noneColor.replace('#', ''); //default of blue ("#4A86E8")
@@ -305,6 +309,7 @@ async function prepAuditData(data, settings) {
     result.name = data.name || "undefined"
     result.auditType = $t(data.auditType) || "undefined"
     result.date = data.date || "undefined"
+    result.militaryDate  = formatDateMilitary(data.date) || "undefined"
     result.date_start = data.date_start || "undefined"
     result.date_end = data.date_end || "undefined"
     if (data.customFields) {
