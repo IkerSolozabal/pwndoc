@@ -483,6 +483,8 @@ async function prepAuditData(data, settings) {
     return result
 }
 
+var imageCounter = 1;
+
 async function splitHTMLParagraphs(data) {
     var result = []
     if (!data)
@@ -506,7 +508,7 @@ async function splitHTMLParagraphs(data) {
             }
             if (result.length === 0)
                 result.push({text: "", images: []})
-            result[result.length-1].images.push({image: src, caption: alt})
+            result[result.length-1].images.push({image: src, caption: alt, number: imageCounter++})
         }
         else if (value === "") {
             continue
