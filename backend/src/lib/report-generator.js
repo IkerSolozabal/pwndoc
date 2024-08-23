@@ -19,8 +19,10 @@ async function generateDoc(audit) {
     var templatePath = `${__basedir}/../report-templates/${audit.template.name}.${audit.template.ext || 'docx'}`
     var content = fs.readFileSync(templatePath, "binary");
     
+    imageCounter = 1;
+
     var zip = new PizZip(content);
-    
+
     translate.setLocale(audit.language)
     $t = translate.translate
 
