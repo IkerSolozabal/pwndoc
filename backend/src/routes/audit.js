@@ -433,7 +433,7 @@ module.exports = function(app, io) {
 
             let militaryDate = formatDateMilitary(audit.date);
             let auditName = `${audit.name.replace(/[\\\/:*?"<>|]/g, "")}`;
-            let completeName = `${militaryDate}_smartauditing_${auditName}`;
+            let completeName = `${militaryDate}_SmartAuditing_${auditName}`;
 
             // Response.SendFile(res, `${audit.name.replace(/[\\\/:*?"<>|]/g, "")}.${audit.template.ext || 'docx'}`, reportDoc);
             Response.SendFile(res, `${completeName}.${audit.template.ext || 'docx'}`, reportDoc);
