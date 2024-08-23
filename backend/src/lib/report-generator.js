@@ -448,6 +448,10 @@ async function prepAuditData(data, settings) {
         .map((value,key) => {return {categoryName:key, categoryFindings:value}})
         .value()
 
+    result.vulbCount = result.findings.length || 0;
+
+
+
     result.creator = {}
     if (data.creator) {
         result.creator.username = data.creator.username || "undefined"
