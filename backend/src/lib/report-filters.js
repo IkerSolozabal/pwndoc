@@ -73,7 +73,14 @@ expressions.filters.convertDate = function(input, s) {
         if (s === "short") {
             return monthsShort[month] + "/" + (day<10 ? '0'+day: day) + "/" + year;
         }
+        if (s === "military") {
+            return formatDateMilitary(input);
+        }
     }
+}
+
+function formatDateMilitary(date) {
+    return date.replace(/-/g, '');
 }
 
 // Convert input date with parameter s (full,short): {input | convertDateLocale: 'locale':'style'}
