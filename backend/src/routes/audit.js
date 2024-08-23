@@ -22,7 +22,7 @@ module.exports = function(app, io) {
             filters.$or = [{type: 'default'}, {type: {$exists:false}}]
         if (req.query.type && ['multi', 'retest'].includes(req.query.type))
             filters.type = req.query.type
-            
+
         Audit.getAudits(acl.isAllowed(req.decodedToken.role, 'audits:read-all'), req.decodedToken.id, filters)
         .then(msg => {
                 var result = []
@@ -149,7 +149,7 @@ module.exports = function(app, io) {
     // Update audit general information
     app.put("/api/audits/:auditId/general", acl.hasPermission('audits:update'), async function(req, res) {
         var update = {};
-        
+
         var settings = await Settings.getAll();
         var audit = await Audit.getAudit(acl.isAllowed(req.decodedToken.role, 'audits:read-all'), req.params.auditId, req.decodedToken.id);
         if (settings.reviews.enabled && audit.state !== "EDIT") {
@@ -430,7 +430,13 @@ module.exports = function(app, io) {
                 throw ({fn: 'BadParameters', message: 'Template not defined'})
 
             var reportDoc = await reportGenerator.generateDoc(audit);
-            Response.SendFile(res, `${audit.name.replace(/[\\\/:*?"<>|]/g, "")}.${audit.template.ext || 'docx'}`, reportDoc);
+
+            let militaryDate = formatDateMilitary(audit.date);
+            let auditName = `${audit.name.replace(/[\\\/:*?"<>|]/g, "")}`;
+            let completeName = `${militaryDate}_smartauditing_${auditName}`;
+
+            // Response.SendFile(res, `${audit.name.replace(/[\\\/:*?"<>|]/g, "")}.${audit.template.ext || 'docx'}`, reportDoc);
+            Response.SendFile(res, `${completeName}.${audit.template.ext || 'docx'}`, reportDoc);
         })
         .catch(err => {
             if (err.code === "ENOENT")
@@ -439,6 +445,10 @@ module.exports = function(app, io) {
                 Response.Internal(res, err)
         });
     });
+
+    function formatDateMilitary(date) {
+        return date.replace(/-/g, '');
+    }
 
     // Update sort options of an audit
     app.put("/api/audits/:auditId/sortfindings", acl.hasPermission('audits:update'), async function(req, res) {
