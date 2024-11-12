@@ -31,6 +31,7 @@ const SettingSchema = new Schema({
                 dateReport: {type: Boolean, default: false},
                 scope: {type: Boolean, default: false},
                 findingType: {type: Boolean, default: false},
+                findingCategory: {type: Boolean, default: false},
                 findingDescription: {type: Boolean, default: false},
                 findingObservation: {type: Boolean, default: false},
                 findingReferences: {type: Boolean, default: false},

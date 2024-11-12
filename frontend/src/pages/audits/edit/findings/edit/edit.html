@@ -49,7 +49,7 @@ buttons
                 <q-card-section class="row q-col-gutter-md q-pt-none">
                     <q-input
                     ref="titleField"
-                    class="col-md-8 col-12" 
+                    class="col-md-6 col-12" 
                     label-slot
                     stack-label v-model="finding.title"
                     outlined
@@ -62,7 +62,7 @@ buttons
                     </q-input>
                     <q-select
                     ref="typeField"
-                    class="col-md-4 col-12"
+                    class="col-md-3 col-12"
                     label-slot
                     v-model="finding.vulnType" 
                     :options="vulnTypesLang" 
@@ -78,6 +78,26 @@ buttons
                     >
                         <template v-slot:label>
                             {{$t('type')}} <span v-if="$settings.report.public.requiredFields.findingType" class="text-red">*</span>
+                        </template>
+                    </q-select>
+                    <q-select
+                    ref="categoryField"
+                    class="col-md-3 col-12"
+                    label-slot
+                    v-model="finding.category" 
+                    :options="vulnCategories" 
+                    option-value="name" 
+                    option-label="name" 
+                    emit-value 
+                    map-options
+                    options-sanitize
+                    outlined
+                    :rules="($settings.report.public.requiredFields.findingCategory) ? [val => !!val || $t('fieldIsRequired')] : ['']"
+                    lazy-rules="ondemand"
+                    :readonly="frontEndAuditState !== AUDIT_VIEW_STATE.EDIT"
+                    >
+                        <template v-slot:label>
+                            {{$t('category')}} <span v-if="$settings.report.public.requiredFields.findingCategory" class="text-red">*</span>
                         </template>
                     </q-select>
                     <q-field

@@ -27,6 +27,7 @@ export default {
             proofsTabVisited: false,
             detailsTabVisited: false,
             vulnTypes: [],
+            vulnCategories: [],
             AUDIT_VIEW_STATE: Utils.AUDIT_VIEW_STATE,
             overrideLeaveCheck: false
         }
@@ -45,6 +46,7 @@ export default {
         this.findingId = this.$route.params.findingId;
         this.getFinding();
         this.getVulnTypes();
+        this.getVulnerabilityCategories();
 
         this.$socket.emit('menu', {menu: 'editFinding', finding: this.findingId, room: this.auditId});
 
@@ -122,6 +124,7 @@ export default {
         screenshotsSize: function() {
             return ((JSON.stringify(this.uploadedImages).length) / 1024).toFixed(2)
         }
+
     },
 
     methods: {
@@ -138,6 +141,17 @@ export default {
             DataService.getVulnerabilityTypes()
             .then((data) => {
                 this.vulnTypes = data.data.datas;
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+        },
+
+        // Get available vulnerability categories
+        getVulnerabilityCategories: function() {
+            DataService.getVulnerabilityCategories()
+            .then((data) => {
+                this.vulnCategories = data.data.datas;
             })
             .catch((err) => {
                 console.log(err)
