@@ -16,7 +16,7 @@
                 <q-item-section avatar>
                     <q-icon name="fa fa-building" />
                 </q-item-section>
-                <q-item-section>{{$t('')}}</q-item-section>
+                <q-item-section>{{$t('companies')}}</q-item-section>
             </q-item>
             <q-item to='/data/clients'>
                 <q-item-section avatar>
