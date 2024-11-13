@@ -18,7 +18,7 @@ var $t
 async function generateDoc(audit) {
     var templatePath = `${__basedir}/../report-templates/${audit.template.name}.${audit.template.ext || 'docx'}`
     var content = fs.readFileSync(templatePath, "binary");
-    
+
     imageCounter = 1;
 
     var zip = new PizZip(content);
@@ -31,14 +31,14 @@ async function generateDoc(audit) {
 
     var opts = {};
     // opts.centered = true;
-    opts.getImage = function(tagValue, tagName) {
+    opts.getImage = function (tagValue, tagName) {
         if (tagValue !== "undefined") {
             tagValue = tagValue.split(",")[1];
             return Buffer.from(tagValue, 'base64');
         }
         // return fs.readFileSync(tagValue, {encoding: 'base64'});
     }
-    opts.getSize = function(img, tagValue, tagName) {
+    opts.getSize = function (img, tagValue, tagName) {
         if (img) {
             var sizeObj = sizeOf(img);
             var width = sizeObj.width;
@@ -63,9 +63,9 @@ async function generateDoc(audit) {
                 width = 600;
                 height = Math.floor(sizeObj.height / divider);
             }
-            return [width,height];
+            return [width, height];
         }
-        return [0,0];
+        return [0, 0];
     }
 
     if (settings.report.private.imageBorder && settings.report.private.imageBorderColor)
@@ -74,11 +74,11 @@ async function generateDoc(audit) {
     try {
         var imageModule = new ImageModule(opts);
     }
-    catch(err) {
+    catch (err) {
         console.log(err)
     }
-    expressionParser.filters = {...expressions, ...customGenerator.expressions}
-    var doc = new Docxtemplater().attachModule(imageModule).loadZip(zip).setOptions({parser: parser, paragraphLoop: true});
+    expressionParser.filters = { ...expressions, ...customGenerator.expressions }
+    var doc = new Docxtemplater().attachModule(imageModule).loadZip(zip).setOptions({ parser: parser, paragraphLoop: true });
     customGenerator.apply(preppedAudit);
     doc.setData(preppedAudit);
     try {
@@ -86,7 +86,7 @@ async function generateDoc(audit) {
     }
     catch (error) {
         if (error.properties.id === 'multi_error') {
-            error.properties.errors.forEach(function(err) {
+            error.properties.errors.forEach(function (err) {
                 console.log(err);
             });
         }
@@ -94,7 +94,7 @@ async function generateDoc(audit) {
             console.log(error)
         if (error.properties && error.properties.errors instanceof Array) {
             const errorMessages = error.properties.errors.map(function (error) {
-                return `Explanation: ${error.properties.explanation}\nScope: ${JSON.stringify(error.properties.scope).substring(0,142)}...`
+                return `Explanation: ${error.properties.explanation}\nScope: ${JSON.stringify(error.properties.scope).substring(0, 142)}...`
             }).join("\n\n");
             // errorMessages is a humanly readable message looking like this :
             // 'The tag beginning with "foobar" is unopened'
@@ -104,7 +104,7 @@ async function generateDoc(audit) {
             throw error
         }
     }
-    var buf = doc.getZip().generate({type:"nodebuffer"});
+    var buf = doc.getZip().generate({ type: "nodebuffer" });
 
     return buf;
 }
@@ -145,12 +145,12 @@ function parser(tag) {
 }
 function cvssStrToObject(cvss) {
     var initialState = 'Not Defined'
-    var res = {AV:initialState, AC:initialState, PR:initialState, UI:initialState, S:initialState, C:initialState, I:initialState, A:initialState, E:initialState, RL:initialState, RC:initialState, CR:initialState, IR:initialState, AR:initialState, MAV:initialState, MAC:initialState, MPR:initialState, MUI:initialState, MS:initialState, MC:initialState, MI:initialState, MA:initialState};
+    var res = { AV: initialState, AC: initialState, PR: initialState, UI: initialState, S: initialState, C: initialState, I: initialState, A: initialState, E: initialState, RL: initialState, RC: initialState, CR: initialState, IR: initialState, AR: initialState, MAV: initialState, MAC: initialState, MPR: initialState, MUI: initialState, MS: initialState, MC: initialState, MI: initialState, MA: initialState };
     if (cvss) {
         var temp = cvss.split('/');
-        for (var i=0; i<temp.length; i++) {
+        for (var i = 0; i < temp.length; i++) {
             var elt = temp[i].split(':');
-            switch(elt[0]) {
+            switch (elt[0]) {
                 case "AV":
                     if (elt[1] === "N") res.AV = "Network"
                     else if (elt[1] === "A") res.AV = "Adjacent Network"
@@ -298,10 +298,10 @@ async function prepAuditData(data, settings) {
     var criticalColor = settings.report.public.cvssColors.criticalColor.replace('#', ''); //default of black ("#212121")
 
     var cellNoneColor = '<w:tcPr><w:shd w:val="clear" w:color="auto" w:fill="' + noneColor + '"/></w:tcPr>';
-    var cellLowColor = '<w:tcPr><w:shd w:val="clear" w:color="auto" w:fill="'+lowColor+'"/></w:tcPr>';
-    var cellMediumColor = '<w:tcPr><w:shd w:val="clear" w:color="auto" w:fill="'+mediumColor+'"/></w:tcPr>';
-    var cellHighColor = '<w:tcPr><w:shd w:val="clear" w:color="auto" w:fill="'+highColor+'"/></w:tcPr>';
-    var cellCriticalColor = '<w:tcPr><w:shd w:val="clear" w:color="auto" w:fill="'+criticalColor+'"/></w:tcPr>';
+    var cellLowColor = '<w:tcPr><w:shd w:val="clear" w:color="auto" w:fill="' + lowColor + '"/></w:tcPr>';
+    var cellMediumColor = '<w:tcPr><w:shd w:val="clear" w:color="auto" w:fill="' + mediumColor + '"/></w:tcPr>';
+    var cellHighColor = '<w:tcPr><w:shd w:val="clear" w:color="auto" w:fill="' + highColor + '"/></w:tcPr>';
+    var cellCriticalColor = '<w:tcPr><w:shd w:val="clear" w:color="auto" w:fill="' + criticalColor + '"/></w:tcPr>';
 
     var result = {}
     result.name = data.name || "undefined"
@@ -329,15 +329,17 @@ async function prepAuditData(data, settings) {
         result.company.logo_small = data.company.logo || "undefined"
     }
 
-    result.client = {}
-    if (data.client) {
-        result.client.email = data.client.email || "undefined"
-        result.client.firstname = data.client.firstname || "undefined"
-        result.client.lastname = data.client.lastname || "undefined"
-        result.client.phone = data.client.phone || "undefined"
-        result.client.cell = data.client.cell || "undefined"
-        result.client.title = data.client.title || "undefined"
-    }
+    result.client = []
+    data.client.forEach(cli => {
+        result.client.push({
+            email: cli.email || "undefined",
+            firstname: cli.firstname || "undefined",
+            lastname: cli.lastname || "undefined",
+            phone: cli.phone || "undefined",
+            cell: cli.cell || "undefined",
+            title: cli.title || "undefined"
+        })
+    })
 
     result.collaborators = []
     data.collaborators.forEach(collab => {
@@ -445,7 +447,7 @@ async function prepAuditData(data, settings) {
     result.categories = _
         .chain(result.findings)
         .groupBy("category")
-        .map((value,key) => {return {categoryName:key, categoryFindings:value}})
+        .map((value, key) => { return { categoryName: key, categoryFindings: value } })
         .value()
 
     result.vulbCount = result.findings.length || 0;
@@ -463,7 +465,7 @@ async function prepAuditData(data, settings) {
     }
 
     for (var section of data.sections) {
-        var formatSection = { 
+        var formatSection = {
             name: $t(section.name)
         }
         if (section.text) // keep text for retrocompatibility
@@ -493,14 +495,14 @@ async function splitHTMLParagraphs(data) {
 
     var splitted = data.split(/(<img.+?src=".*?".+?alt=".*?".*?>)/)
 
-    for (var value of splitted){
+    for (var value of splitted) {
         if (value.startsWith("<img")) {
             var src = value.match(/<img.+src="(.*?)"/) || ""
             var alt = value.match(/<img.+alt="(.*?)"/) || ""
             if (src && src.length > 1) src = src[1]
             if (alt && alt.length > 1) alt = _.unescape(alt[1])
 
-            if (!src.startsWith('data')){
+            if (!src.startsWith('data')) {
                 try {
                     src = (await Image.getOne(src)).value
                 } catch (error) {
@@ -508,26 +510,26 @@ async function splitHTMLParagraphs(data) {
                 }
             }
             if (result.length === 0)
-                result.push({text: "", images: []})
-            result[result.length-1].images.push({image: src, caption: alt, number: imageCounter++})
+                result.push({ text: "", images: [] })
+            result[result.length - 1].images.push({ image: src, caption: alt, number: imageCounter++ })
         }
         else if (value === "") {
             continue
         }
         else {
-            result.push({text: value, images: []})
+            result.push({ text: value, images: [] })
         }
     }
     return result
 }
 
-function replaceSubTemplating(o, originalData = o){
+function replaceSubTemplating(o, originalData = o) {
     var regexp = /\{_\{([a-zA-Z0-9\[\]\_\.]{1,})\}_\}/gm;
     if (Array.isArray(o))
         o.forEach(key => replaceSubTemplating(key, originalData))
     else if (typeof o === 'object' && !!o) {
         Object.keys(o).forEach(key => {
-            if (typeof o[key] === 'string') o[key] = o[key].replace(regexp, (match, word) =>  _.get(originalData,word.trim(),''))
+            if (typeof o[key] === 'string') o[key] = o[key].replace(regexp, (match, word) => _.get(originalData, word.trim(), ''))
             else replaceSubTemplating(o[key], originalData)
         })
     }

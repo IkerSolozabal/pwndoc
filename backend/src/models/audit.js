@@ -118,7 +118,7 @@ AuditSchema.statics.getAudit = (isAdmin, auditId, userId) => {
         query.populate('template')
         query.populate('creator', 'username firstname lastname email phone role')
         query.populate('company')
-        query.populate('client')
+        query.populate('client', 'email firstname lastname phone cell title')
         query.populate('collaborators', 'username firstname lastname email phone role')
         query.populate('reviewers', 'username firstname lastname role')
         query.populate('approvals', 'username firstname lastname role')

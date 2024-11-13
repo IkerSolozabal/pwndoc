@@ -96,9 +96,8 @@ buttons
                     :options="selectClients"
                     option-value="email"
                     option-label="email"
-                    @input="setCompanyFromClient"
                     multiple
-                    clearable
+                    use-chips
                     options-sanitize
                     outlined
                     :rules="($settings.report.public.requiredFields.client) ? [val => !!val || $t('fieldIsRequired')] : ['']"
@@ -106,7 +105,7 @@ buttons
                     :readonly="frontEndAuditState !== AUDIT_VIEW_STATE.EDIT"
                     >
                         <template v-slot:label>
-                            {{$t('client')}} <span v-if="$settings.report.public.requiredFields.client" class="text-red">*</span>
+                            {{$t('clients')}} <span v-if="$settings.report.public.requiredFields.client" class="text-red">*</span>
                         </template>
                     </q-select>
                     <q-select 

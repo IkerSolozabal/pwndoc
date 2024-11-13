@@ -32,6 +32,7 @@ module.exports = function(app, io) {
                     a.name = audit.name
                     a.language = audit.language
                     a.auditType = audit.auditType
+                    a.category = audit.category
                     a.creator = audit.creator
                     a.collaborators = audit.collaborators
                     a.company = audit.company
