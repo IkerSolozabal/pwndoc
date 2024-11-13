@@ -60,6 +60,7 @@ var SortOption = {
 
 var AuditSchema = new Schema({
     name:               {type: String, required: true},
+    criticity:           String,
     auditType:          String,
     date:               String,
     date_start:         String,
@@ -116,6 +117,7 @@ AuditSchema.statics.getAudit = (isAdmin, auditId, userId) => {
         if (!isAdmin)
             query.or([{creator: userId}, {collaborators: userId}, {reviewers: userId}])
         query.populate('template')
+        query.populate('criticity')
         query.populate('creator', 'username firstname lastname email phone role')
         query.populate('company')
         query.populate('client', 'email firstname lastname phone cell title')
@@ -216,6 +218,7 @@ AuditSchema.statics.createRetest = (isAdmin, auditId, userId, auditType) => {
                     throw({fn: 'BadParameters', message: 'Retest already exists for this Audit'})
                 audit.name = row.name
                 audit.company = row.company
+                audit.criticity = row.criticity
                 audit.client = row.client
                 audit.collaborators = row.collaborators
                 audit.reviewers = row.reviewers
@@ -439,6 +442,7 @@ AuditSchema.statics.getGeneral = (isAdmin, auditId, userId) => {
                 path: 'company', 
                 select: 'name'}
             });
+            query.populate('criticity')
         query.populate('creator', 'username firstname lastname')
         query.populate('collaborators', 'username firstname lastname')
         query.populate('reviewers', 'username firstname lastname')

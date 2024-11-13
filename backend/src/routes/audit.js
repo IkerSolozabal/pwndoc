@@ -32,7 +32,7 @@ module.exports = function(app, io) {
                     a.name = audit.name
                     a.language = audit.language
                     a.auditType = audit.auditType
-                    a.category = audit.category
+                    a.criticity = audit.criticity
                     a.creator = audit.creator
                     a.collaborators = audit.collaborators
                     a.company = audit.company
@@ -217,6 +217,7 @@ module.exports = function(app, io) {
         if (req.body.date) update.date = req.body.date;
         if (req.body.date_start) update.date_start = req.body.date_start;
         if (req.body.date_end) update.date_end = req.body.date_end;
+        if (req.body.criticity) update.criticity = req.body.criticity;
         if (req.body.client !== undefined) update.client = req.body.client
         if (req.body.company !== undefined) {
             update.company = {};

@@ -305,6 +305,7 @@ async function prepAuditData(data, settings) {
 
     var result = {}
     result.name = data.name || "undefined"
+    result.criticity = data.criticity || "undefined"
     result.auditType = $t(data.auditType) || "undefined"
     result.date = data.date || "undefined"
     result.date_start = data.date_start || "undefined"

@@ -30,6 +30,7 @@ export default {
             audit: {
                 creator: {},
                 name: "",
+                category: "",
                 auditType: "",
                 client: [],
                 company: {},
@@ -45,6 +46,8 @@ export default {
                 approvals: []
             },
             auditOrig: {},
+            // List of existing categories
+            categories: [],
             // List of existing clients
             clients: [],
             // List of filtered clients when company is selected
@@ -81,6 +84,7 @@ export default {
         this.getTemplates();
         this.getLanguages();
         this.getAuditTypes();
+        this.getCategories();
 
         this.$socket.emit('menu', {menu: 'general', room: this.auditId});
 
@@ -240,9 +244,9 @@ export default {
 
         // Get Templates list
         getTemplates: function() {
-            TemplateService.getTemplates()
+            DataService.getVulnerabilityCategories()
             .then((data) => {
-                this.templates = data.data.datas;
+                this.categories = data.data.datas;
             })
             .catch((err) => {
                 console.log(err)
@@ -265,6 +269,17 @@ export default {
             DataService.getAuditTypes()
             .then((data) => {
                 this.auditTypes = data.data.datas;
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+        },
+
+        // Get Templates list
+        getCategories: function() {
+            TemplateService.getTemplates()
+            .then((data) => {
+                this.templates = data.data.datas;
             })
             .catch((err) => {
                 console.log(err)

@@ -29,7 +29,19 @@ buttons
                             {{$t('name')}} <span class="text-red">*</span>
                         </template>
                     </q-input>
-                    <div class="col"></div>
+                    <q-select 
+                    class="col-md-6 col-12 q-pt-none"
+                    :label="$t('Criticity')"
+                    v-model="audit.criticity" 
+                    :options="categories" 
+                    option-value="name" 
+                    option-label="name" 
+                    emit-value 
+                    map-options
+                    options-sanitize
+                    outlined 
+                    :readonly="frontEndAuditState !== AUDIT_VIEW_STATE.EDIT"
+                    />
                     <q-select 
                     class="col-md-6 col-12 q-pt-none"
                     :label="$t('language')"
