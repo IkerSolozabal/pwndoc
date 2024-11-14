@@ -260,8 +260,24 @@ buttons
                 ref="scopeField"
                 :label="$t('auditScope')" 
                 v-model="audit.scope" 
-                :rules="($settings.report.public.requiredFields.scope) ? [val => !!val || $t('fieldIsRequired')] : ['']"
+                :rules="($settings.report.public.requiredFields.recommendation) ? [val => !!val || $t('fieldIsRequired')] : ['']"
                 :readonly="frontEndAuditState !== AUDIT_VIEW_STATE.EDIT"/>
+                <q-field
+                ref="recommendationsField"
+                class="col-md-12 basic-editor q-pt-none"
+                borderless
+                label-slot
+                stack-label
+                :rules="($settings.report.public.requiredFields.recommendation) ? [val => !!audit.recommendation || $t('fieldIsRequired')] : ['']"
+                lazy-rules="ondemand"
+                >
+                    <template v-slot="control">
+                        <basic-editor ref="basiceditor_recommendation" noSync v-model="audit.recommendation" :editable="frontEndAuditState === AUDIT_VIEW_STATE.EDIT"/>
+                    </template>
+                    <template v-slot:label>
+                        {{$t('General recommendations')}} <span v-if="$settings.report.public.requiredFields.recommendation" class="text-red">*</span>
+                    </template>
+                </q-field>
             </q-card-section>
             <q-expansion-item 
             :label="$t('customFields')"

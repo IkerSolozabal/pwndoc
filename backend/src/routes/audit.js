@@ -33,6 +33,7 @@ module.exports = function(app, io) {
                     a.language = audit.language
                     a.auditType = audit.auditType
                     a.criticity = audit.criticity
+                    a.recommendation = audit.recommendation
                     a.creator = audit.creator
                     a.collaborators = audit.collaborators
                     a.company = audit.company
@@ -218,7 +219,8 @@ module.exports = function(app, io) {
         if (req.body.date_start) update.date_start = req.body.date_start;
         if (req.body.date_end) update.date_end = req.body.date_end;
         if (req.body.criticity) update.criticity = req.body.criticity;
-        if (req.body.client !== undefined) update.client = req.body.client
+        if (!_.isNil(req.body.recommendation)) update.recommendation = req.body.recommendation;
+        if (req.body.client !== undefined) update.client = req.body.client;
         if (req.body.company !== undefined) {
             update.company = {};
             if (req.body.company && req.body.company._id)

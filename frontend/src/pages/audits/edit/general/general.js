@@ -3,6 +3,7 @@ import { Notify, Dialog } from 'quasar';
 import Breadcrumb from 'components/breadcrumb';
 import TextareaArray from 'components/textarea-array'
 import CustomFields from 'components/custom-fields'
+import BasicEditor from 'components/editor';
 
 import AuditService from '@/services/audit';
 import ClientService from '@/services/client';
@@ -30,7 +31,8 @@ export default {
             audit: {
                 creator: {},
                 name: "",
-                category: "",
+                criticity: "",
+                recommendation: "",
                 auditType: "",
                 client: [],
                 company: {},
@@ -73,6 +75,7 @@ export default {
     },
 
     components: {
+        BasicEditor,
         Breadcrumb,
         TextareaArray,
         CustomFields
