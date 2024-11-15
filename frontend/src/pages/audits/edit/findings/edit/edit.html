@@ -207,7 +207,7 @@ buttons
                     lazy-rules="ondemand"
                     >
                         <template v-slot="control">
-                            <basic-editor v-model="finding.scope" :toolbar="['format', 'marks', 'list']" :editable="frontEndAuditState === AUDIT_VIEW_STATE.EDIT"/>
+                            <basic-editor v-model="finding.scope" :editable="frontEndAuditState === AUDIT_VIEW_STATE.EDIT"/>
                         </template>
                         <template v-slot:label>
                             {{$t('affectedAssets')}} <span v-if="$settings.report.public.requiredFields.findingAffected" class="text-red">*</span>
