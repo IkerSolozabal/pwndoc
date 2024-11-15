@@ -2,24 +2,24 @@
     <div class="col-md-8 col-12 offset-md-2 q-mt-md">
 
         <q-card class="q-my-md">
-          <q-card-section class="q-py-none bg-blue-grey-5 text-white">
-              <q-item style="padding:0px;">
-                  <q-item-section class="col-md-11">
-                      <div class="text-h6">{{$t('generalSettings')}}</div>
-                  </q-item-section>
-              </q-item>
-          </q-card-section>
-          <q-card-section>
-            <div class="text-bold">{{$t('changeDisplayLanguage')}}</div>
-            <br/>
-            <div class="text-grey-8">{{$t('changeDisplayLanguageInfo')}}</div>
-            <br/>
-            <q-item>
-              <q-item-section class="col-md-2">
-                <language-selector></language-selector>
-              </q-item-section>
-            </q-item>
-          </q-card-section>
+            <q-card-section class="q-py-none bg-blue-grey-5 text-white">
+                <q-item style="padding:0px;">
+                    <q-item-section class="col-md-11">
+                        <div class="text-h6">{{$t('generalSettings')}}</div>
+                    </q-item-section>
+                </q-item>
+            </q-card-section>
+            <q-card-section>
+                <div class="text-bold">{{$t('changeDisplayLanguage')}}</div>
+                <br />
+                <div class="text-grey-8">{{$t('changeDisplayLanguageInfo')}}</div>
+                <br />
+                <q-item>
+                    <q-item-section class="col-md-2">
+                        <language-selector></language-selector>
+                    </q-item-section>
+                </q-item>
+            </q-card-section>
         </q-card>
 
         <q-card v-if="UserService.isAllowed('settings:read')" class="q-my-md">
@@ -33,37 +33,42 @@
             <div v-if="UserService.isAllowed('settings:update')">
                 <q-card-section>
                     <div class="text-bold">{{$t('reportsImagesBorder')}}</div>
-                    <br/>
+                    <br />
                     <div class="text-grey-8">{{$t('addBorderToImages')}}</div>
-                    <br/>
+                    <br />
                     <q-item>
                         <q-item-section class="col-md-2">
                             <q-toggle :label="$t('btn.enable')" v-model="settings.report.private.imageBorder" />
                         </q-item-section>
                         <q-item-section class="col-md-1">
-                            <input :disabled="!settings.report.private.imageBorder" type="color" id="colorpicker" v-model="settings.report.private.imageBorderColor" />
+                            <input :disabled="!settings.report.private.imageBorder" type="color" id="colorpicker"
+                                v-model="settings.report.private.imageBorderColor" />
                         </q-item-section>
                         <q-item-section class="col-md-2">
-                            <label :disabled="!settings.report.private.imageBorder" for="colorpicker" class="vertical-center">{{$t('currentColor')}}: {{settings.report.private.imageBorderColor}}</label>
+                            <label :disabled="!settings.report.private.imageBorder" for="colorpicker"
+                                class="vertical-center">{{$t('currentColor')}}:
+                                {{settings.report.private.imageBorderColor}}</label>
                         </q-item-section>
                     </q-item>
                 </q-card-section>
                 <q-separator />
                 <q-card-section>
                     <div class="text-bold">{{$t('cvssColors')}}</div>
-                    <br/>
+                    <br />
                     <div class="text-grey-8">{{$t('changeCvssColorsDescription')}}</div>
-                    <br/>
+                    <br />
                     <q-list>
                         <q-item>
                             <q-item-section class="col-md-2">
                                 <label class="vertical-center">{{$t('critical')}} : </label>
                             </q-item-section>
                             <q-item-section class="col-md-1">
-                                <input type="color" id="colorpicker" v-model="settings.report.public.cvssColors.criticalColor"/>
+                                <input type="color" id="colorpicker"
+                                    v-model="settings.report.public.cvssColors.criticalColor" />
                             </q-item-section>
                             <q-item-section class="col-md-2">
-                                <label for="colorpicker" class="vertical-center">{{$t('currentColor')}}: {{settings.report.public.cvssColors.criticalColor}}</label>
+                                <label for="colorpicker" class="vertical-center">{{$t('currentColor')}}:
+                                    {{settings.report.public.cvssColors.criticalColor}}</label>
                             </q-item-section>
                         </q-item>
                         <q-item>
@@ -71,10 +76,12 @@
                                 <label class="vertical-center">{{$t('high')}} : </label>
                             </q-item-section>
                             <q-item-section class="col-md-1">
-                                <input type="color" id="colorpicker" v-model="settings.report.public.cvssColors.highColor"/>
+                                <input type="color" id="colorpicker"
+                                    v-model="settings.report.public.cvssColors.highColor" />
                             </q-item-section>
                             <q-item-section class="col-md-2">
-                                <label for="colorpicker" class="vertical-center">{{$t('currentColor')}}: {{settings.report.public.cvssColors.highColor}}</label>
+                                <label for="colorpicker" class="vertical-center">{{$t('currentColor')}}:
+                                    {{settings.report.public.cvssColors.highColor}}</label>
                             </q-item-section>
                         </q-item>
                         <q-item>
@@ -82,10 +89,12 @@
                                 <label class="vertical-center">{{$t('medium')}} : </label>
                             </q-item-section>
                             <q-item-section class="col-md-1">
-                                <input type="color" id="colorpicker" v-model="settings.report.public.cvssColors.mediumColor"/>
+                                <input type="color" id="colorpicker"
+                                    v-model="settings.report.public.cvssColors.mediumColor" />
                             </q-item-section>
                             <q-item-section class="col-md-2">
-                                <label for="colorpicker" class="vertical-center">{{$t('currentColor')}}: {{settings.report.public.cvssColors.mediumColor}}</label>
+                                <label for="colorpicker" class="vertical-center">{{$t('currentColor')}}:
+                                    {{settings.report.public.cvssColors.mediumColor}}</label>
                             </q-item-section>
                         </q-item>
                         <q-item>
@@ -93,10 +102,12 @@
                                 <label class="vertical-center">{{$t('low')}} : </label>
                             </q-item-section>
                             <q-item-section class="col-md-1">
-                                <input type="color" id="colorpicker" v-model="settings.report.public.cvssColors.lowColor"/>
+                                <input type="color" id="colorpicker"
+                                    v-model="settings.report.public.cvssColors.lowColor" />
                             </q-item-section>
                             <q-item-section class="col-md-2">
-                                <label for="colorpicker" class="vertical-center">{{$t('currentColor')}}: {{settings.report.public.cvssColors.lowColor}}</label>
+                                <label for="colorpicker" class="vertical-center">{{$t('currentColor')}}:
+                                    {{settings.report.public.cvssColors.lowColor}}</label>
                             </q-item-section>
                         </q-item>
                         <q-item>
@@ -104,10 +115,12 @@
                                 <label class="vertical-center">{{$t('informational')}} : </label>
                             </q-item-section>
                             <q-item-section class="col-md-1">
-                                <input type="color" id="colorpicker" v-model="settings.report.public.cvssColors.noneColor"/>
+                                <input type="color" id="colorpicker"
+                                    v-model="settings.report.public.cvssColors.noneColor" />
                             </q-item-section>
                             <q-item-section class="col-md-2">
-                                <label for="colorpicker" class="vertical-center">{{$t('currentColor')}}: {{settings.report.public.cvssColors.noneColor}}</label>
+                                <label for="colorpicker" class="vertical-center">{{$t('currentColor')}}:
+                                    {{settings.report.public.cvssColors.noneColor}}</label>
                             </q-item-section>
                         </q-item>
                     </q-list>
@@ -115,66 +128,46 @@
                 <q-separator />
                 <q-card-section>
                     <div class="text-bold">{{$t('captions')}}</div>
-                    <br/>
+                    <br />
                     <div class="text-grey-8">{{$t('captionsDescription')}}</div>
-                    <br/>
+                    <br />
                     <q-item>
                         <q-item-section class="col-md-6">
-                            <q-select
-                            label="Caption Labels'"
-                            stack-label
-                            outlined
-                            v-model="settings.report.public.captions"
-                            use-input
-                            use-chips
-                            multiple
-                            hide-dropdown-icon
-                            options-sanitize
-                            input-debounce="0"
-                            new-value-mode="add-unique"
-                        />
+                            <q-select label="Caption Labels'" stack-label outlined
+                                v-model="settings.report.public.captions" use-input use-chips multiple
+                                hide-dropdown-icon options-sanitize input-debounce="0" new-value-mode="add-unique" />
                         </q-item-section>
                     </q-item>
                 </q-card-section>
                 <q-separator />
                 <q-card-section>
                     <div class="text-bold">{{$t('highlightWarning')}}</div>
-                    <br/>
+                    <br />
                     <div class="text-grey-8" v-html="$t('highlightWarningDescription')"></div>
-                    <br/>
+                    <br />
                     <q-item>
                         <q-item-section class="col-md-2">
                             <q-toggle :label="$t('btn.enable')" v-model="settings.report.public.highlightWarning" />
                         </q-item-section>
                         <q-item-section class="col-md-1">
-                            <input
-                            v-model="settings.report.public.highlightWarningColor"
-                            :disabled="!settings.report.public.highlightWarning"
-                            type="color"
-                            id="colorpicker" 
-                            style="pointer-events: none"
-                            >
-                                <q-popup-proxy>
-                                    <div class="row q-pa-xs" style="width: 144px; overflow: hidden">
-                                        <div class="q-gutter-xs">
-                                            <q-btn 
-                                            v-close-popup
-                                            v-for="color of highlightPalette" :key="color" 
-                                            square
+                            <input v-model="settings.report.public.highlightWarningColor"
+                                :disabled="!settings.report.public.highlightWarning" type="color" id="colorpicker"
+                                style="pointer-events: none">
+                            <q-popup-proxy>
+                                <div class="row q-pa-xs" style="width: 144px; overflow: hidden">
+                                    <div class="q-gutter-xs">
+                                        <q-btn v-close-popup v-for="color of highlightPalette" :key="color" square
                                             :style="{'background-color': color, 'width': '24px', 'height': '24px'}"
-                                            @click="settings.report.public.highlightWarningColor = color"
-                                            >
-                                            </q-btn>
-                                        </div>
+                                            @click="settings.report.public.highlightWarningColor = color">
+                                        </q-btn>
                                     </div>
-                                </q-popup-proxy>
+                                </div>
+                            </q-popup-proxy>
                             </input>
                         </q-item-section>
                         <q-item-section class="col-md-2">
-                            <label
-                            :disabled="!settings.report.public.highlightWarning"
-                            for="colorpicker"
-                            class="vertical-center">
+                            <label :disabled="!settings.report.public.highlightWarning" for="colorpicker"
+                                class="vertical-center">
                                 {{$t('currentColor')}}: {{settings.report.public.highlightWarningColor}}
                             </label>
                         </q-item-section>
@@ -183,9 +176,9 @@
                 <q-separator />
                 <q-card-section>
                     <div class="text-bold">{{$t('defaultFieldsRequired')}}</div>
-                    <br/>
+                    <br />
                     <div class="text-grey-8">{{$t('defaultFieldsRequiredDescription')}}</div>
-                    <br/>
+                    <br />
                     <q-item>
                         <q-item-label>
                             <div class="text-bold text-italic">{{$t('general')}}</div>
@@ -239,7 +232,7 @@
                             <q-toggle v-model="settings.report.public.requiredFields.scope" />
                         </q-item-section>
                     </q-item>
-                    <br/>
+                    <br />
                     <q-item>
                         <q-item-label>
                             <div class="text-bold text-italic">{{$t('findings')}}</div>
@@ -327,6 +320,42 @@
                     </q-item>
                 </q-card-section>
             </div>
+            <q-separator />
+            <q-card-section>
+                <div class="text-bold">{{$t('Visibility of Fields')}}</div>
+                <br />
+                <div class="text-grey-8">{{$t('Fields that will be shown')}}</div>
+                <br />
+                <q-item>
+                    <q-item-label>
+                        <div class="text-bold text-italic">{{$t('findings')}}</div>
+                    </q-item-label>
+                </q-item>
+                <q-item dense>
+                    <q-item-section class="col-md-2">
+                        <q-item-label>{{$t('CVSS')}} {{$t('visible')}}</q-item-label>
+                    </q-item-section>
+                    <q-item-section>
+                        <q-toggle v-model="settings.report.public.visibleFields.FindingCVSS" />
+                    </q-item-section>
+                </q-item>
+                <q-item dense>
+                    <q-item-section class="col-md-2">
+                        <q-item-label>{{$t('Remediation Difficulty')}} {{$t('visible')}}</q-item-label>
+                    </q-item-section>
+                    <q-item-section>
+                        <q-toggle v-model="settings.report.public.visibleFields.findingRemediationDifficulty" />
+                    </q-item-section>
+                </q-item>
+                <q-item dense>
+                    <q-item-section class="col-md-2">
+                        <q-item-label>{{$t('Remediation Priority')}} {{$t('visible')}}</q-item-label>
+                    </q-item-section>
+                    <q-item-section>
+                        <q-toggle v-model="settings.report.public.visibleFields.findingRemediationPriority" />
+                    </q-item-section>
+                </q-item>
+            </q-card-section>
         </q-card>
 
         <q-card v-if="UserService.isAllowed('settings:read')" class="q-my-lg">
@@ -335,116 +364,66 @@
                     <q-item-section class="col-11">
                         <div class="text-h6">{{$t('reviews')}}</div>
                     </q-item-section>
-                    <q-item-section class="col-md-1 items-center" >
-                        <q-toggle
-                            color="primary"
-                            keep-color
-                            :disable="!canEdit"
-                            v-model="settings.reviews.enabled"
-                        />
+                    <q-item-section class="col-md-1 items-center">
+                        <q-toggle color="primary" keep-color :disable="!canEdit" v-model="settings.reviews.enabled" />
                     </q-item-section>
                 </q-item>
             </q-card-section>
             <q-separator />
             <q-card-section>
                 <div class="text-bold">{{$t('auditUpdateAfterApproval')}}</div>
-                <br/>
+                <br />
                 <div class="text-grey-8">
                     {{$t('changeApproveBehaviorIfAuditUpdated')}}
                 </div>
             </q-card-section>
             <q-card-section>
-                <q-btn-toggle
-                    :disable="!canEdit || !settings.reviews.enabled"
-                    v-model="settings.reviews.private.removeApprovalsUponUpdate"
-                    class="toggleButton"
-                    spread
-                    no-caps
-                    rounded
-                    unelevated
-                    toggle-color="primary"
-                    color="white"
-                    text-color="primary"
-                    :options="[
+                <q-btn-toggle :disable="!canEdit || !settings.reviews.enabled"
+                    v-model="settings.reviews.private.removeApprovalsUponUpdate" class="toggleButton" spread no-caps
+                    rounded unelevated toggle-color="primary" color="white" text-color="primary" :options="[
                     {label: $t('removeAllPriorApprovals'), value: true},
                     {label: $t('keepAllPriorApprovals'), value: false}
-                    ]"
-                />
+                    ]" />
             </q-card-section>
             <q-separator />
             <q-card-section>
                 <div class="text-bold">{{$t('mandatoryReview')}}</div>
-                <br/>
+                <br />
                 <div class="text-grey-8" v-html="$t('mandatoryReviewInfo')"></div>
             </q-card-section>
             <q-card-section>
                 <q-item>
                     <q-item-section class="col-2">
-                        <q-toggle
-                            :label="$t('btn.enable')"
-                            v-model="settings.reviews.public.mandatoryReview"
-                            color="primary"
-                            keep-color
-                            id="toggle"
-                            :disable="!canEdit || !settings.reviews.enabled"
-                        />
+                        <q-toggle :label="$t('btn.enable')" v-model="settings.reviews.public.mandatoryReview"
+                            color="primary" keep-color id="toggle" :disable="!canEdit || !settings.reviews.enabled" />
                     </q-item-section>
                     <q-item-section class="col-2">
-                        <q-input
-                            v-model.number="settings.reviews.public.minReviewers"
-                            type="number"
-                            :disable="!canEdit || !settings.reviews.enabled"
-                            filled
-                            :min="1"
-                            :max="99"
-                            :hint="$t('minimalNumberOfReviewers')"
-                        />
+                        <q-input v-model.number="settings.reviews.public.minReviewers" type="number"
+                            :disable="!canEdit || !settings.reviews.enabled" filled :min="1" :max="99"
+                            :hint="$t('minimalNumberOfReviewers')" />
                     </q-item-section>
                 </q-item>
             </q-card-section>
         </q-card>
 
         <q-card class="q-my-lg" v-if="canEdit" align="center">
-            <q-card-section >
+            <q-card-section>
                 <q-item>
                     <q-item-section class="q-px-md">
-                        <q-btn 
-                        :label="$t('saveSettings')"
-                        color="secondary"
-                        no-caps
-                        flat
-                        class="bg-secondary text-white"
-                        @click="updateSettings"
-                        ></q-btn>
+                        <q-btn :label="$t('saveSettings')" color="secondary" no-caps flat
+                            class="bg-secondary text-white" @click="updateSettings"></q-btn>
                     </q-item-section>
                     <q-item-section class="q-px-md">
-                        <q-btn 
-                        :label="$t('revertSettingsToDefaults')"
-                        color="negative"
-                        no-caps
-                        flat
-                        class="bg-negative text-white"
-                        @click="revertToDefaults"
-                        /></q-btn>
+                        <q-btn :label="$t('revertSettingsToDefaults')" color="negative" no-caps flat
+                            class="bg-negative text-white" @click="revertToDefaults" /></q-btn>
                     </q-item-section>
                     <q-item-section class="q-px-md">
-                        <input
-                        ref="importSetttings"
-                        value=""
-                        type="file"
-                        accept=".json"
-                        class="hidden"
-                        @change="importSettings($event.target.files)"
-                        />
-                        <q-btn 
-                        color="warning"
-                        no-caps
-                        flat
-                        class="bg-warning text-white"
-                        @click="$refs.importSetttings.click()"
-                        >
+                        <input ref="importSetttings" value="" type="file" accept=".json" class="hidden"
+                            @change="importSettings($event.target.files)" />
+                        <q-btn color="warning" no-caps flat class="bg-warning text-white"
+                            @click="$refs.importSetttings.click()">
                             <div class="row items-center no-wrap">
-                                <q-icon left name="fas fa-file-import" class="icon-update-btn"/>
+                                <q-icon left name="fas fa-file-import" class="icon-update-btn" />
                                 <div class="text-center">
                                     {{$t('importSettings')}}
                                 </div>
@@ -452,15 +431,9 @@
                         </q-btn>
                     </q-item-section>
                     <q-item-section class="q-px-md">
-                        <q-btn 
-                        color="warning"
-                        no-caps
-                        flat
-                        class="bg-warning text-white"
-                        @click="exportSettings"
-                        >
+                        <q-btn color="warning" no-caps flat class="bg-warning text-white" @click="exportSettings">
                             <div class="row items-center no-wrap">
-                                <q-icon left name="fas fa-file-export" class="icon-update-btn"/>
+                                <q-icon left name="fas fa-file-export" class="icon-update-btn" />
                                 <div class="text-center">
                                     {{$t('exportSettings')}}
                                 </div>
@@ -471,4 +444,4 @@
             </q-card-section>
         </q-card>
     </div>
-</div>        
+</div>

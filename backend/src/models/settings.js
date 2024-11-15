@@ -40,6 +40,11 @@ const SettingSchema = new Schema({
                 findingRemediationDifficulty: {type: Boolean, default: false},
                 findingPriority: {type: Boolean, default: false},
                 findingRemediation: {type: Boolean, default: false},
+            },
+            visibleFields:{
+                FindingCVSS: {type: Boolean, default: true},
+                findingRemediationDifficulty: {type: Boolean, default: true},
+                findingRemediationPriority: {type: Boolean, default: true},
             }
         },
         private: {
