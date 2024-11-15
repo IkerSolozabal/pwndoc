@@ -336,7 +336,7 @@ export default {
                 return true
             if ((this.finding.observation || this.findingOrig.observation) && this.finding.observation !== this.findingOrig.observation)
                 return true
-            if (!this.$_.isEqual(this.finding.references, this.findingOrig.references))
+            if ((this.finding.references || this.findingOrig.references) && this.finding.references !== this.findingOrig.references)
                 return true
             if (!this.$_.isEqual(this.finding.customFields, this.findingOrig.customFields))
                 return true
@@ -383,6 +383,9 @@ export default {
             result = regex.exec(this.finding.observation)
             if (result && result[1])
                 return (result[1].length > 119) ? "<b>Observation</b><br/>"+result[1].substring(0,119)+'...' : "<b>Observation</b><br/>"+result[1]
+            result = regex.exec(this.finding.references)
+            if (result && result[1])
+                return (result[1].length > 119) ? "<b>References</b><br/>"+result[1].substring(0,119)+'...' : "<b>References</b><br/>"+result[1]
             result = regex.exec(this.finding.poc)
             if (result && result[1])
                 return (result[1].length > 119) ? "<b>Proofs</b><br/>"+result[1].substring(0,119)+'...' : "<b>Proofs</b><br/>"+result[1]

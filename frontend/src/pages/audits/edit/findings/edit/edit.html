@@ -132,13 +132,22 @@ buttons
                             {{$t('observation')}} <span v-if="$settings.report.public.requiredFields.findingObservation" class="text-red">*</span>
                         </template>
                     </q-field>
-                    <textarea-array
+                    <q-field
                     ref="referencesField"
-                    class="col-12 q-pt-none"
-                    :label="$t('references')+' '+$t('one_per_line')"
-                    v-model="finding.references"
-                    :rules="($settings.report.public.requiredFields.findingReferences) ? [val => !!val || $t('fieldIsRequired')] : ['']"
-                    :readonly="frontEndAuditState !== AUDIT_VIEW_STATE.EDIT"/>
+                    class="col-md-12 basic-editor q-pt-none"
+                    borderless
+                    label-slot
+                    stack-label
+                    :rules="($settings.report.public.requiredFields.findingReferences) ? [val => !!finding.references || $t('fieldIsRequired')] : ['']"
+                    lazy-rules="ondemand"
+                    >
+                        <template v-slot="control">
+                            <basic-editor ref="basiceditor_references" noSync v-model="finding.references" :editable="frontEndAuditState === AUDIT_VIEW_STATE.EDIT"/>
+                        </template>
+                        <template v-slot:label>
+                            {{$t('references')}} <span v-if="$settings.report.public.requiredFields.findingReferences" class="text-red">*</span>
+                        </template>
+                    </q-field>
                 </q-card-section>
 
                 <q-expansion-item 
@@ -393,12 +402,26 @@ buttons
                             <basic-editor ref="basiceditor_observation" noSync v-model="finding.observation" :editable="false"/>
                         </template>
                     </q-field>
-                    <textarea-array
-                    class="col-12"
-                    :label="$t('references')+' '+$t('one_per_line')"
-                    v-model="finding.references"
-                    readonly
-                    />
+                    <q-field
+                    class="col-md-12 basic-editor q-pt-none"
+                    borderless
+                    :label="$t('references')"
+                    stack-label
+                    >
+                        <template v-slot="control">
+                            <basic-editor ref="basiceditor_references" noSync v-model="finding.references" :editable="false"/>
+                        </template>
+                    </q-field>
+                    <q-field
+                    class="col-md-12 basic-editor q-pt-none"
+                    :label="$t('description')"
+                    borderless
+                    stack-label
+                    >
+                        <template v-slot="control">
+                            <basic-editor ref="basiceditor_description" noSync v-model="finding.description" :editable="false"/>
+                        </template>
+                    </q-field>
                 </q-card-section>
                 <q-card-section>
                     <q-field
